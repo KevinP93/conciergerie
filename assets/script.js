@@ -1,17 +1,70 @@
-﻿// Menu mobile toggle
-const menuToggle = document.getElementById('menuToggle');
-const navLinks = document.getElementById('navLinks');
+// Intro overlay + main interactions
 
-menuToggle.addEventListener('click', () => {
-    navLinks.classList.toggle('active');
-    menuToggle.classList.toggle('active');
-});
+document.addEventListener('DOMContentLoaded', () => {
+    const intro = document.getElementById('introOverlay');
 
-// Close menu when clicking on a link
-document.querySelectorAll('.nav-links a').forEach(link => {
-    link.addEventListener('click', () => {
-        navLinks.classList.remove('active');
-        menuToggle.classList.remove('active');
+    if (intro) {
+        document.body.classList.add('intro-lock');
+
+        setTimeout(() => {
+            intro.classList.add('intro-overlay--hide');
+            document.body.classList.remove('intro-lock');
+
+            setTimeout(() => {
+                intro.remove();
+            }, 900);
+        }, 700);
+    }
+
+    // Menu mobile toggle
+    const menuToggle = document.getElementById('menuToggle');
+    const navLinks = document.getElementById('navLinks');
+
+    if (menuToggle && navLinks) {
+        menuToggle.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+            menuToggle.classList.toggle('active');
+        });
+
+        // Close menu when clicking on a link
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+                menuToggle.classList.remove('active');
+            });
+        });
+    }
+
+    // Smooth scroll
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            const target = document.querySelector(this.getAttribute('href'));
+            if (target) {
+                target.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            }
+        });
+    });
+
+    // Scroll animations with enhanced observer
+    const observerOptions = {
+        threshold: 0.15,
+        rootMargin: '0px 0px -80px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+            }
+        });
+    }, observerOptions);
+
+    document.querySelectorAll('.fade-in').forEach(element => {
+        observer.observe(element);
     });
 });
 
@@ -25,38 +78,6 @@ window.addEventListener('scroll', () => {
     }
 });
 
-// Smooth scroll
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function (e) {
-        e.preventDefault();
-        const target = document.querySelector(this.getAttribute('href'));
-        if (target) {
-            target.scrollIntoView({
-                behavior: 'smooth',
-                block: 'start'
-            });
-        }
-    });
-});
-
-// Scroll animations with enhanced observer
-const observerOptions = {
-    threshold: 0.15,
-    rootMargin: '0px 0px -80px 0px'
-};
-
-const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            entry.target.classList.add('visible');
-        }
-    });
-}, observerOptions);
-
-document.querySelectorAll('.fade-in').forEach(element => {
-    observer.observe(element);
-});
-
 // Parallax effect on hero
 window.addEventListener('scroll', () => {
     const scrolled = window.pageYOffset;
@@ -66,3 +87,4 @@ window.addEventListener('scroll', () => {
         hero.style.opacity = 1 - (scrolled / window.innerHeight);
     }
 });
+
