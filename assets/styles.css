@@ -1,4 +1,4 @@
-* {
+﻿* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -148,88 +148,153 @@ nav.scrolled .logo-img {
     border-radius: 2px;
 }
 
-/* Hero Section Premium */
+/* HERO façon maquette The Square */
 .hero {
-    height: 100vh;
-    background: 
-        radial-gradient(circle at 20% 50%, rgba(212, 175, 55, 0.08) 0%, transparent 50%),
-        radial-gradient(circle at 80% 50%, rgba(212, 175, 55, 0.05) 0%, transparent 50%),
-        linear-gradient(135deg, #000000 0%, #0a0a0a 100%);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
     position: relative;
+    min-height: 100vh;
+    height: 100vh;
+    width: 100%;
+    max-width: none;
+    margin: 0;
+    padding: 0;
+    background-image: url("image_fond.png"); /* adapte .jpg/.png si besoin */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    color: #fff;
     overflow: hidden;
 }
 
+/* voile sombre comme sur la capture */
 .hero::before {
     content: '';
     position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-image: 
-        linear-gradient(rgba(212, 175, 55, 0.03) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(212, 175, 55, 0.03) 1px, transparent 1px);
-    background-size: 100px 100px;
-    animation: gridMove 20s linear infinite;
+    inset: 0;
+    background: linear-gradient(
+        90deg,
+        rgba(0, 0, 0, 0.75) 0%,
+        rgba(0, 0, 0, 0.35) 45%,
+        rgba(0, 0, 0, 0.1) 100%
+    );
+    z-index: 1;
 }
 
-@keyframes gridMove {
-    0% { transform: translate(0, 0); }
-    100% { transform: translate(100px, 100px); }
+/* bar de contact tout en haut */
+.hero-topbar {
+    position: absolute;
+    top: 14px;
+    left: 7%;
+    right: 7%;
+    display: flex;
+    justify-content: flex-end;
+    gap: 1.5rem;
+    font-size: 0.85rem;
+    letter-spacing: 1px;
+    color: rgba(255, 255, 255, 0.85);
+    z-index: 3;
 }
 
+.hero-topbar a {
+    color: rgba(255, 255, 255, 0.9);
+    text-decoration: none;
+}
+
+/* contenu centré verticalement côté gauche */
 .hero-content {
-    max-width: 1000px;
-    padding: 2rem;
     position: relative;
     z-index: 2;
-    animation: fadeInUp 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+    max-width: 1200px;
+    width: 100%;
+    height: 100%;
+    margin: 0 auto;
+    padding: 0 7%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
 }
 
+/* logo en haut à gauche sur l'image */
 .hero-logo-main {
-    width: 400px;
-    max-width: 90%;
+    width: 150px;
+    height: auto;
     margin-bottom: 3rem;
-    animation: fadeIn 1.8s ease;
-    filter: drop-shadow(0 0 40px rgba(212, 175, 55, 0.4));
+    filter: drop-shadow(0 0 20px rgba(0, 0, 0, 0.6));
 }
 
+/* bloc texte comme la capture */
+.hero-text-block {
+    max-width: 550px;
+}
+
+.hero-script {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.4rem;
+    font-style: italic;
+    color: var(--gold);
+    margin-bottom: 0.5rem;
+}
+
+/* titre principal : même style que la capture */
 .hero h1 {
     font-family: 'Playfair Display', serif;
-    font-size: 5rem;
+    font-size: 3.4rem;
     font-weight: 300;
-    margin-bottom: 2rem;
-    letter-spacing: 6px;
-    background: linear-gradient(135deg, var(--gold-light) 0%, var(--gold) 50%, var(--gold-dark) 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    text-transform: uppercase;
-    line-height: 1.2;
-}
-
-.hero .tagline {
-    font-size: 1.6rem;
-    color: var(--gray-light);
-    margin-bottom: 4rem;
-    font-weight: 200;
     letter-spacing: 3px;
+    text-transform: uppercase;
+    color: #ffffff;
+    margin-bottom: 2.5rem;
+    white-space: nowrap;
 }
 
+/* on n'utilise plus tagline + subtitle sur la home */
+.hero .tagline,
 .hero .subtitle {
-    font-size: 1.1rem;
-    color: var(--gray);
-    margin-bottom: 3rem;
-    font-weight: 300;
-    letter-spacing: 2px;
-    max-width: 700px;
-    margin-left: auto;
-    margin-right: auto;
+    display: none;
 }
+
+/* bouton téléphone comme le rectangle jaune de la capture */
+.hero-phone-btn {
+    background: var(--gold);
+    border-color: var(--gold);
+    color: #000;
+    padding: 1.2rem 3.5rem;
+    font-weight: 500;
+    letter-spacing: 2px;
+}
+
+.hero-phone-btn:hover {
+    color: #000;
+}
+
+@media (max-width: 968px) {
+    .hero {
+        text-align: left;
+    }
+
+    .hero-logo-main {
+        width: 120px;
+        margin-bottom: 2rem;
+    }
+
+    .hero h1 {
+        font-size: 2.4rem;
+        letter-spacing: 2px;
+        white-space: normal;
+    }
+
+    .hero-script {
+        font-size: 1.8rem;
+    }
+
+    .hero-topbar {
+        font-size: 0.75rem;
+        left: 1.5rem;
+        right: 1.5rem;
+    }
+}
+
 
 .cta-button {
     display: inline-block;
@@ -463,7 +528,7 @@ section {
 }
 
 .service-list li::before {
-    content: '◆';
+    content: '?';
     position: absolute;
     left: 0;
     color: var(--gold);
@@ -665,67 +730,29 @@ footer p {
 }
 
 @media (max-width: 968px) {
-    .nav-links {
-        position: fixed;
-        top: 0;
-        right: -100%;
-        height: 100vh;
-        width: 80%;
-        max-width: 400px;
-        background: rgba(0, 0, 0, 0.98);
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        gap: 3rem;
-        transition: right 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-        backdrop-filter: blur(20px);
-        border-left: 1px solid rgba(212, 175, 55, 0.2);
-    }
-
-    .nav-links.active {
-        right: 0;
-    }
-
-    .menu-toggle {
-        display: flex;
-        z-index: 1001;
-    }
-
-    .menu-toggle.active span:nth-child(1) {
-        transform: rotate(45deg) translate(8px, 8px);
-    }
-
-    .menu-toggle.active span:nth-child(2) {
-        opacity: 0;
-    }
-
-    .menu-toggle.active span:nth-child(3) {
-        transform: rotate(-45deg) translate(8px, -8px);
-    }
-
-    .logo-text {
-        display: none;
-    }
-
-    .hero h1 {
-        font-size: 3rem;
-        letter-spacing: 3px;
-    }
-
-    .hero .tagline {
-        font-size: 1.2rem;
+    .hero {
+        text-align: left;
     }
 
     .hero-logo-main {
-        width: 300px;
+        width: 120px;
+        margin-bottom: 2rem;
     }
 
-    .section-title {
-        font-size: 2.5rem;
+    .hero h1 {
+        font-size: 2.4rem;
+        letter-spacing: 2px;
+        white-space: normal;
     }
 
-    .stat-number {
-        font-size: 3rem;
+    .hero-script {
+        font-size: 1.8rem;
+    }
+
+    .hero-topbar {
+        font-size: 0.75rem;
+        left: 1.5rem;
+        right: 1.5rem;
     }
 }
 
@@ -769,3 +796,20 @@ footer p {
         font-size: 1.1rem;
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
