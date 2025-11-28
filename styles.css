@@ -227,7 +227,7 @@ nav.scrolled .logo-img {
     max-width: none;
     margin: 0;
     padding: 0;
-    background-image: url("assets/image_fondTest1.png"); /* visuel d'origine */
+    background-image: url("assets/image_fondTest2.png"); /* visuel full width adapte aux grands �crans */
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
