@@ -1046,6 +1046,10 @@ footer p {
         padding: 0 2rem;
     }
 
+    .hero {
+        background-attachment: scroll; /* fiabilise l'affichage sur tablettes */
+    }
+
     section {
         padding: 6rem 2rem;
     }
